@@ -1,0 +1,20 @@
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# Based on the patch at:
+# https://bugzilla.mozilla.org/show_bug.cgi?id=681624
+#
+
+--- nss-3.15/nss/cmd/shlibsign/Makefile	2013-05-28 23:43:24.000000000 +0200
++++ nss-3.15-patched/nss/cmd/shlibsign/Makefile	2013-06-18 11:40:11.362359234 +0200
+@@ -95,5 +95,6 @@
+     endif
+ endif
+ 
+-libs install :: $(CHECKLOC)
+-
++ifndef SKIP_SHLIBSIGN
++	libs install :: $(CHECKLOC)
++endif

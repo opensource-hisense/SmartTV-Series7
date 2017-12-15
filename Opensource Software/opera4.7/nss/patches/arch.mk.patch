@@ -1,0 +1,26 @@
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+--- nss-3.15/nss/coreconf/arch.mk	2013-05-28 23:43:24.000000000 +0200
++++ nss-3.15-patched/nss/coreconf/arch.mk	2013-06-18 12:51:46.062329189 +0200
+@@ -27,13 +27,18 @@
+ 	64BIT_TAG=
+ endif
+ 
++ifndef OS_ARCH
+ OS_ARCH := $(subst /,_,$(shell uname -s))
++endif
+ 
+ #
+ # Attempt to differentiate between sparc and x86 Solaris
+ #
+ 
++ifndef OS_TEST
+ OS_TEST := $(shell uname -m)
++endif
++
+ ifeq ($(OS_TEST),i86pc)
+     OS_RELEASE := $(shell uname -r)_$(OS_TEST)
+ else

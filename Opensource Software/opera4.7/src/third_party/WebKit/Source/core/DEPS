@@ -1,0 +1,12 @@
+include_rules = [
+    "+bindings/core",
+    "-bindings/modules",
+    "+build/win",
+    "+core",
+    "-modules",
+    "+platform",
+    "+public/platform",
+    "-public/web",
+    "+third_party/skia/include",
+    "-web",
+]

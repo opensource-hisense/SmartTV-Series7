@@ -1,0 +1,39 @@
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+--- nss-3.15/nss/coreconf/Linux.mk	2013-05-28 23:43:24.000000000 +0200
++++ nss-3.15-patched/nss/coreconf/Linux.mk	2013-06-18 11:47:48.182356037 +0200
+@@ -16,9 +16,9 @@
+ 	IMPL_STRATEGY = _PTH
+ endif
+ 
+-CC			= gcc
+-CCC			= g++
+-RANLIB			= ranlib
++CC			= ${CROSS}gcc
++CCC			= ${CROSS}g++
++RANLIB			= ${CROSS}ranlib
+ 
+ DEFAULT_COMPILER = gcc
+ 
+@@ -174,8 +174,10 @@
+ endif
+ endif
+ 
++ifneq ($(SYSTEM_ZLIB), 0)
+ USE_SYSTEM_ZLIB = 1
+ ZLIB_LIBS = -lz
++endif
+ 
+ # The -rpath '$$ORIGIN' linker option instructs this library to search for its
+ # dependencies in the same directory where it resides.
+@@ -199,3 +201,7 @@
+ ifeq ($(OS_RELEASE),2.4)
+ DEFINES += -DNO_FORK_CHECK
+ endif
++
++ifdef HAVE_UNISTD_H
++DEFINES += -DHAVE_UNISTD_H
++endif
